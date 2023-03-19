@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <style>
+        .div1,
+        .div2,
+        .div3 {
+            height: 50vh;
+            width: 32.9%;
+            
+            float: left;
+            border: 2px solid orange;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        @media (max-width: 700px) {
+          /* CSS rules for small screens */
+          .div1,
+        .div2,
+        .div3 {
+            height: 50vh;
+            width: 30%;
+            
+            float: left;
+            border: 2px solid orange;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        }
+
+
+
+   
+
+
+        .div4 {
+            
+            clear: left;
+           
+        }
+
+        .btn-primary1 {
+            background-color: blue;
+            width: 40%;
+            height: 3rem;
+            border-radius: 16px;
+            margin-left:auto;
+            margin-right:auto;
+            opacity: 0.6;
+            display: inline-block;
+            text-decoration: none;
+            color:aliceblue;
+
+        }
+        .btn-primary2 {
+            background-color: blue;
+            width: 80%;
+            height: 3rem;
+            margin-left:auto;
+            margin-right:auto;
+            border-radius: 16px;
+            opacity: 0.6;
+            display: inline-block;
+            text-decoration: none;
+            color:aliceblue;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .btn-primary3 {
+            background-color: blue;
+            width: 100%;
+            height: 3rem;
+            border-radius: 16px;
+            opacity: 0.6;
+            display: inline-block;
+            text-decoration: none;
+            color:aliceblue;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .btn-primary4 {
+            background-color: blue;
+            width: 60%;
+            height: 3rem;
+            border-radius: 16px;
+            opacity: 0.6;
+            display: inline-block;
+            text-decoration: none;
+            color:aliceblue;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        
+
+        .btn-default {
+
+            width: 32%;
+            height: 2rem;
+            background-color:teal;
+            margin-top: 30px;
+            border-radius: 80px;
+
+            opacity: 0.6;
+            color:aliceblue;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .flex-parent {
+            display: flex;
+            margin-top:30px ;
+          }
+          
+          .jc-center {
+            justify-content: center;
+          }
+          
+          button.margin-right {
+            margin-right: 70px;
+            background-color: cornflowerblue;
+            height: 4rem;
+            width: 8rem;
+            opacity: 0.6;
+            
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 80px;
+          }
+
+          button.button2{
+            background-color: cornflowerblue;
+            height: 4rem;
+            width: 8rem;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 80px;
+          }
+          
+          body {
+            background-image: url("https://cdn-media-2.freecodecamp.org/w1280/5f9ca6e9740569d1a4ca739a.jpg");
+           
+          }
+        
+        
+    </style>
+</head>
+
+<!-- <body style="background-color: aquamarine;"> -->
+    <body>
+        
+        <h1 style="text-align: center;">Welcome to Tower of Hanoi! </h1>
+        <div class="div1" id="d1">
+    
+            <!-- <button type="button"  class="btn btn-large btn-block btn-primary" id="0"onclick="">2</button>
+            <button type="button" class="btn btn-large btn-block btn-primary" id="1"onclick="">4</button>
+            <button type="button" class="btn btn-large btn-block btn-primary" id="2"onclick="">3</button>
+            <button type="button" class="btn btn-large btn-block btn-primary" id="3"onclick="">1</button> -->
+    
+            
+        </div>
+        <div class="div2" id="d2"></div>
+        <div class="div3" id="d3"></div>
+        <div class="div4"  >
+    
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="oneto2()">1->2</button>
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="twoto3()">2->3</button>
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="threeto1()">3->1</button>
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="oneto3()">1->3</button>
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="twoto1()">2->1</button>
+            <button type="button" class="btn btn-large btn-block btn-default" onclick="threeto2()">3->2</button>
+            
+            
+            </div>
+    
+        <div class="flex-parent jc-center">
+    
+            <button type="button" class="green margin-right" id="reset"  onclick="reset()">Reset</button>
+            <button type="button" class="button2" id="check" onclick="check()">Check 🔔</button>
+        </div>
+
+    <script>
+		
+        const audio = new Audio("https://www.fesliyanstudios.com/play-mp3/387");
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+              audio.play();
+            });
+          });
+
+
+
+    </script>
+    <script>
+      // Select the div element
+const myDiv = document.querySelector('#d1');
+const myDiv2 = document.querySelector('#d2');
+const myDiv3 = document.querySelector('#d3');
+// Create an array of button elements
+var myButtons = [
+  document.createElement('button'),
+  document.createElement('button'),
+  document.createElement('button'),
+  document.createElement('button')
+];
+
+// Set the text content for each button element
+myButtons[0].textContent = '1';
+myButtons[1].textContent = '3';
+myButtons[2].textContent = '4';
+myButtons[3].textContent = '2';
+var i=1;
+myButtons.forEach(button => {
+   button.classList.add('btn-primary'+i);
+   i=i+1;
+ });
+ 
+// Loop through the array and append each button element to the div element
+myButtons.forEach(button => myDiv.appendChild(button));
+
+function oneto2() {
+  console.log('Button clicked! One to 2');
+  let lc=myDiv.lastChild;
+  myDiv.removeChild(lc);
+  myDiv2.appendChild(lc);
+
+}
+function twoto3() {
+
+  let lc=myDiv2.lastChild;
+  myDiv2.removeChild(lc);
+  myDiv3.appendChild(lc);
+
+}
+
+function threeto1() {
+
+let lc=myDiv3.lastChild;
+myDiv3.removeChild(lc);
+myDiv.appendChild(lc);
+
+}
+
+function threeto2() {
+
+let lc=myDiv3.lastChild;
+myDiv3.removeChild(lc);
+myDiv2.appendChild(lc);
+
+}
+
+function twoto1() {
+
+let lc=myDiv2.lastChild;
+myDiv2.removeChild(lc);
+myDiv.appendChild(lc);
+
+}
+
+function oneto3() {
+  console.log('Button clicked! One to 2');
+  let lc=myDiv.lastChild;
+  myDiv.removeChild(lc);
+  myDiv3.appendChild(lc);
+
+}
+function reset() {
+  myDiv.innerHTML = "";
+  myDiv2.innerHTML = "";
+  myDiv3.innerHTML = "";
+  myButtons.forEach(button => myDiv.appendChild(button));
+
+}
+function check() {
+  var passed = true;
+  if(myDiv.children.length!=0 && myDiv2.children.length==0 && myDiv3.children.length==0){
+    for (let i = 0; i < myDiv.children.length - 1; i++) {
+    if ( myDiv.children[i].textContent <  myDiv.children[i+1].textContent) {
+      passed = false;
+      break;
+    }
+  }
+  }
+  else{
+    passed=false
+  }
+  if(passed){
+    alert("Congrtulations, you have completed this puzzle !! :)");
+  }
+  else{
+    alert("Sorry, it's not currect. Try Again :(");
+  }
+
+
+}
+    </script>
+</body>
+</html>
